@@ -1,0 +1,7 @@
+[
+  { "name": "Home", "path": "/" },
+  { "name": "Games", "path": "/games" },
+  { "name": "Rewards", "path": "/rewards" },
+  { "name": "Discover", "path": "/discover" },
+  { "name": "Global Rank", "path": "/global-rank" }
+]

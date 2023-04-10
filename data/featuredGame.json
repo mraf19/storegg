@@ -1,0 +1,27 @@
+[
+  {
+    "imgUrl": "/img/Thumbnail-1.png",
+    "title": "Super Mechs",
+    "device": "Mobile"
+  },
+  {
+    "imgUrl": "/img/Thumbnail-2.png",
+    "title": "Call of Duty: Modern",
+    "device": "Mobile"
+  },
+  {
+    "imgUrl": "/img/Thumbnail-3.png",
+    "title": "Mobile Legends",
+    "device": "Mobile"
+  },
+  {
+    "imgUrl": "/img/Thumbnail-4.png",
+    "title": "Clash of Clans",
+    "device": "Mobile"
+  },
+  {
+    "imgUrl": "/img/Thumbnail-5.png",
+    "title": "Valorant",
+    "device": "Desktop"
+  }
+]

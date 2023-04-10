@@ -1,0 +1,20 @@
+[
+  {
+    "imgUrl": "/icon/step1.svg",
+    "title": "1. Start",
+    "description1": "Pilih salah satu game",
+    "description2": "yang ingin kamu top up"
+  },
+  {
+    "imgUrl": "/icon/step2.svg",
+    "title": "2. Fill Up",
+    "description1": "Top up sesuai dengan",
+    "description2": "nominal yang sudah tersedia"
+  },
+  {
+    "imgUrl": "/icon/step3.svg",
+    "title": "3. Be a Winner",
+    "description1": "Siap digunakan untuk",
+    "description2": "improve permainan kamu"
+  }
+]
