@@ -1,0 +1,20 @@
+[
+  {
+    "imgUrl": "/icon/ic-desktop.svg",
+    "title1": "Game",
+    "title2": "Desktop",
+    "totalSpent": 18000500
+  },
+  {
+    "imgUrl": "/icon/ic-mobile.svg",
+    "title1": "Game",
+    "title2": "Mobile",
+    "totalSpent": 8455000
+  },
+  {
+    "imgUrl": "/icon/ic-other.svg",
+    "title1": "Other",
+    "title2": "Categories",
+    "totalSpent": 5000000
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Overview",
+    "path": "/member",
+    "imgUrl": "/icon/ic-overview.svg"
+  },
+  {
+    "title": "Transactions",
+    "path": "/member/transactions",
+    "imgUrl": "/icon/ic-transaction.svg"
+  },
+  {
+    "title": "Messages",
+    "path": "/member/messages",
+    "imgUrl": "/icon/ic-messages.svg"
+  },
+  {
+    "title": "Card",
+    "path": "/member/card",
+    "imgUrl": "/icon/ic-card.svg"
+  },
+  {
+    "title": "Rewards",
+    "path": "/member/rewards",
+    "imgUrl": "/icon/ic-rewards.svg"
+  },
+  {
+    "title": "Settings",
+    "path": "/member/edit-profile",
+    "imgUrl": "/icon/ic-setting.svg"
+  },
+  {
+    "title": "Log Out",
+    "path": "/member/logout",
+    "imgUrl": "/icon/ic-logout.svg"
+  }
+]

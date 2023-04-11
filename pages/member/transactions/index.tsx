@@ -1,6 +1,9 @@
+import Sidebar from "../../../components/organisms/Sidebar";
+
 export default function Transactions() {
   return (
     <>
+      <Sidebar />
       <section className="transactions overflow-auto">
         <main className="main-wrapper">
           <div className="ps-lg-0">
