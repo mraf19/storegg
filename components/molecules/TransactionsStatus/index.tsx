@@ -1,9 +1,7 @@
-import Link from "next/link";
-import React from "react";
 import Status from "./Status";
 
 export default function TransactionStatus() {
-  const statusses = ["All Trx", "Success", "Pending", "Failed"];
+  const statusses = ["AllTrx", "Success", "Pending", "Failed"];
   return (
     <div className="row mt-30 mb-20">
       <div className="col-lg-12 col-12 main-content">
