@@ -1,6 +1,6 @@
 import { numberFormat } from "../../../utils/NumberFormatter";
 import TransactionStatus from "../../molecules/TransactionsStatus";
-import TableTransactions from "../TableTransactions";
+import TableTransactions from "../../molecules/TableTransactions";
 
 export default function TransactionContent() {
   return (
