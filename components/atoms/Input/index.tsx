@@ -2,14 +2,18 @@ type InputProps = {
   label: string;
   type: string;
   name: string;
+  value: string
   placeholder: string;
+  onChange: React.ChangeEventHandler
 };
 
 export default function Input({
   label,
   type,
   name,
+  value,
   placeholder,
+  onChange,
   ...nativeProps
 }: InputProps) {
   return (
@@ -25,6 +29,8 @@ export default function Input({
         className="form-control rounded-pill text-lg"
         id={name}
         name={name}
+        value={value}
+        onChange={onChange}
         aria-describedby={name}
         placeholder={placeholder}
         {...nativeProps}

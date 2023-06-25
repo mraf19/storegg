@@ -8,7 +8,7 @@ import Link from "next/link";
 import menus from "../../../data/menus.json";
 
 export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
   return (
     <section>
