@@ -5,11 +5,12 @@ type GameItemProps = {
   imgUrl: string;
   title: string;
   device: string;
+  id: string
 };
-export default function GameItem({ imgUrl, title, device }: GameItemProps) {
+export default function GameItem({ imgUrl, title, device, id }: GameItemProps) {
   return (
     <div className="featured-game-card position-relative">
-      <Link href="./detail">
+      <Link href={`/detail/${id}`}>
         <div className="blur-sharp">
           <Image
             className="thumbnail"
