@@ -3,16 +3,33 @@ import Footer from "../../components/organisms/Footer";
 import Navbar from "../../components/organisms/Navbar";
 import TopUpForm from "../../components/organisms/TopUpForm";
 import TopUpItem from "../../components/organisms/TopUpItem";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { getDetailVoucher } from "../../services/player";
+import { NominalTypes, PaymentTypes } from "../../services/dataTypes";
 
 export default function Detail() {
   const {query, isReady} = useRouter()
+  const [ detail, setDetail ] = useState({
+    name: "",
+    thumbnail: "",
+    category: {
+      name: ""
+    }
+  })
+  const [nominals, setNominals] = useState<NominalTypes[]>([])
+  const [payments, setPayments] = useState<PaymentTypes[]>([])
+
+  const getDetailVoucherAPI = useCallback( async (id : string) => {
+    const data = await getDetailVoucher(id)
+    setDetail(data.detail)
+    setNominals(data.detail.nominals)
+    setPayments(data.payment)
+    console.log(data)
+  },[])
 
   useEffect(() => {
     if(isReady){
-      console.log(query.id)
-    } else {
-      console.log("nothing")
+      getDetailVoucherAPI(query.id)
     }
   }, [isReady])
   return (
@@ -29,11 +46,11 @@ export default function Detail() {
             </p>
           </div>
           <div className="row">
-            <TopUpItem type="mobile" />
+            <TopUpItem type="mobile" category={detail.category.name} name={detail.name} thumbnail={detail.thumbnail}/>
             <div className="col-xl-9 col-lg-8 col-md-7 ps-md-25">
-              <TopUpItem type="desktop" />
+              <TopUpItem type="desktop" category={detail.category.name} name={detail.name} />
               <hr />
-              <TopUpForm />
+              <TopUpForm nominals={nominals} payments={payments}/>
             </div>
           </div>
         </div>

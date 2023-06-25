@@ -1,39 +1,29 @@
 import { numberFormat } from "../../../utils/NumberFormatter";
 
-type LabelCardProps = {
+type NominalCardProps = {
   id: string;
-  name: string;
-  isNominal: boolean;
-  nominal?: number;
-  item?: string;
-  method?: string;
-  desc: string;
+  coinQuantity: number
+  coinName: string
+  price: number;
 };
 
-export default function LabelCard({
-  id,
-  name,
-  isNominal,
-  nominal,
-  item,
-  method,
-  desc,
-}: LabelCardProps) {
+export default function NominalCard({
+  id, 
+  coinName,
+  coinQuantity,
+  price,
+}: NominalCardProps) {
   return (
     <>
       <label
         className="col-lg-4 col-sm-6 ps-md-15 pe-md-15 pt-md-15 pb-md-15 pt-10 pb-10"
         htmlFor={id}
       >
-        <input className="d-none" type="radio" id={id} name={name} value={id} />
+        <input className="d-none" type="radio" id={id} name={coinName} value={id} />
         <div className="detail-card">
           <div className="d-flex justify-content-between">
             <p className="text-3xl color-palette-1 m-0">
-              {isNominal ? (
-                <span className="fw-medium">{`${nominal} ${item}`}</span>
-              ) : (
-                <span className="fw-medium">{method}</span>
-              )}
+              <span className="fw-medium">{`${coinQuantity} ${coinName}`}</span>
             </p>
             <svg
               id="icon-check"
@@ -47,13 +37,13 @@ export default function LabelCard({
               <path
                 d="M5.83301 10L8.46459 12.5L14.1663 7.5"
                 stroke="#00BAFF"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </div>
-          <p className="text-lg color-palette-1 m-0">{desc}</p>
+          <p className="text-lg color-palette-1 m-0">Rp. {numberFormat(price)}</p>
         </div>
       </label>
     </>

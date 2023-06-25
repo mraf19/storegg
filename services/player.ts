@@ -11,3 +11,13 @@ export async function getFeaturedGame(){
 
     return axiosResponse.data
 }
+
+
+export async function getDetailVoucher(id: string){
+    const URL = `players/${id}/detail`
+
+    const response = await axios.get(`${ROOT_URL}/${apiVersion}/${URL}`)
+    const axiosResponse = response.data
+
+    return axiosResponse.data
+}

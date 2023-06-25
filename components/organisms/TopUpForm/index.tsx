@@ -1,9 +1,15 @@
 import Link from "next/link";
 import Input from "../../atoms/Input";
-import Label from "./LabelCard";
-import LabelCard from "./LabelCard";
+import NominalCard from "./NominalCard";
+import { NominalTypes, PaymentTypes } from "../../../services/dataTypes";
+import PaymentCard from "./PaymentCard";
 
-export default function TopUpForm() {
+type TopUpFormProps = {
+  nominals: NominalTypes[]
+  payments: PaymentTypes[]
+}
+
+export default function TopUpForm({nominals, payments} : TopUpFormProps) {
   return (
     <form action="./checkout.html" method="POST">
       <div className="pt-md-50 pt-30">
@@ -21,46 +27,13 @@ export default function TopUpForm() {
           Nominal Top Up
         </p>
         <div className="row justify-content-between">
-          <LabelCard
-            isNominal
-            id="topup1"
-            name="topup"
-            nominal={125}
-            item="Gold"
-            desc="Rp. 3.250.000"
+          {
+            nominals.map(nominal => (
+              <NominalCard key={nominal._id} id={nominal._id} coinName={nominal.coinName} coinQuantity={nominal.coinQuantity} price={nominal.price}
           />
-          <LabelCard
-            isNominal
-            id="topup2"
-            name="topup"
-            nominal={225}
-            item="Gold"
-            desc="Rp. 3.250.000"
-          />
-          <LabelCard
-            isNominal
-            id="topup3"
-            name="topup"
-            nominal={350}
-            item="Gold"
-            desc="Rp. 3.250.000"
-          />
-          <LabelCard
-            isNominal
-            id="topup4"
-            name="topup"
-            nominal={550}
-            item="Gold"
-            desc="Rp. 3.250.000"
-          />
-          <LabelCard
-            isNominal
-            id="topup5"
-            name="topup"
-            nominal={750}
-            item="Gold"
-            desc="Rp. 3.250.000"
-          />
+            ))
+          }
+          
           <div className="col-lg-4 col-sm-6"></div>
         </div>
       </div>
@@ -70,20 +43,13 @@ export default function TopUpForm() {
         </p>
         <fieldset id="paymentMethod">
           <div className="row justify-content-between">
-            <LabelCard
-              id="transfer"
-              name="paymentMethod"
-              desc="Worldwide Available"
-              method="Transfer"
-              isNominal={false}
-            />
-            <LabelCard
-              id="visa"
-              name="paymentMethod"
-              desc="Credit Card"
-              method="Visa"
-              isNominal={false}
-            />
+            {
+              payments.map(payment => (
+                payment.banks.map(bank => (
+                  <PaymentCard key={bank._id} id={bank._id} bankName={bank.bankName} type={payment.type} />
+                ))
+              ))
+            }
             <div className="col-lg-4 col-sm-6"></div>
           </div>
         </fieldset>
