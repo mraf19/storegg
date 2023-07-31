@@ -1,33 +1,32 @@
 import axios from "axios";
+import callAPI from "../config/api";
 
-const ROOT_URL = process.env.NEXT_PUBLIC_API
-const apiVersion = "api/v1"
+const ROOT_URL = process.env.NEXT_PUBLIC_API;
+const apiVersion = "api/v1";
 
-export async function getFeaturedGame(){
-    const URL = "players/landingpage"
+export async function getFeaturedGame() {
+  const url = `${ROOT_URL}/${apiVersion}/players/landingpage`;
 
-    const response = await axios.get(`${ROOT_URL}/${apiVersion}/${URL}`)
-    const axiosResponse = response.data
-
-    return axiosResponse.data
+  return callAPI({
+    url,
+    method: "GET",
+  });
 }
 
+export async function getDetailVoucher(id: string) {
+  const url = `${ROOT_URL}/${apiVersion}/players/${id}/detail`;
 
-export async function getDetailVoucher(id: string){
-    const URL = `players/${id}/detail`
-
-    const response = await axios.get(`${ROOT_URL}/${apiVersion}/${URL}`)
-    const axiosResponse = response.data
-
-    return axiosResponse.data
+  return callAPI({
+    url,
+    method: "GET",
+  });
 }
 
-export async function getCategory(){
-    const URL = `players/category`
+export async function getCategory() {
+  const url = `${ROOT_URL}/${apiVersion}/players/category`;
 
-    const response = await axios.get(`${ROOT_URL}/${apiVersion}/${URL}`)
-    const axiosResponse = response.data
-
-    return axiosResponse.data
+  return callAPI({
+    url,
+    method: "GET",
+  });
 }
-

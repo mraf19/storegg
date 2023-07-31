@@ -8,29 +8,30 @@ import { getDetailVoucher } from "../../services/player";
 import { NominalTypes, PaymentTypes } from "../../services/dataTypes";
 
 export default function Detail() {
-  const {query, isReady} = useRouter()
-  const [ detail, setDetail ] = useState({
+  const { query, isReady } = useRouter();
+  const [detail, setDetail] = useState({
     name: "",
     thumbnail: "",
     category: {
-      name: ""
-    }
-  })
-  const [nominals, setNominals] = useState<NominalTypes[]>([])
-  const [payments, setPayments] = useState<PaymentTypes[]>([])
+      name: "",
+    },
+  });
+  const [nominals, setNominals] = useState<NominalTypes[]>([]);
+  const [payments, setPayments] = useState<PaymentTypes[]>([]);
 
-  const getDetailVoucherAPI = useCallback( async (id : string) => {
-    const data = await getDetailVoucher(id)
-    setDetail(data.detail)
-    setNominals(data.detail.nominals)
-    setPayments(data.payment)
-  },[])
+  const getDetailVoucherAPI = useCallback(async (id: string) => {
+    const response = await getDetailVoucher(id);
+    const data = response.data;
+    setDetail(data.detail);
+    setNominals(data.detail.nominals);
+    setPayments(data.payment);
+  }, []);
 
   useEffect(() => {
-    if(isReady){
-      getDetailVoucherAPI(query.id)
+    if (isReady) {
+      getDetailVoucherAPI(query.id);
     }
-  }, [isReady])
+  }, [isReady]);
   return (
     <>
       <Navbar />
@@ -45,11 +46,20 @@ export default function Detail() {
             </p>
           </div>
           <div className="row">
-            <TopUpItem type="mobile" category={detail.category.name} name={detail.name} thumbnail={detail.thumbnail}/>
+            <TopUpItem
+              type="mobile"
+              category={detail.category.name}
+              name={detail.name}
+              thumbnail={detail.thumbnail}
+            />
             <div className="col-xl-9 col-lg-8 col-md-7 ps-md-25">
-              <TopUpItem type="desktop" category={detail.category.name} name={detail.name} />
+              <TopUpItem
+                type="desktop"
+                category={detail.category.name}
+                name={detail.name}
+              />
               <hr />
-              <TopUpForm nominals={nominals} payments={payments}/>
+              <TopUpForm nominals={nominals} payments={payments} />
             </div>
           </div>
         </div>

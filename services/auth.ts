@@ -1,44 +1,26 @@
 import axios from "axios";
 import { LogInTypes } from "./dataTypes";
+import callAPI from "../config/api";
 
 const ROOT_URL = process.env.NEXT_PUBLIC_API;
 const apiVersion = "api/v1";
 
-export async function setSignUp(data: any) {
-  const URL = `auth/signup`;
+export async function setSignUp(data: FormData) {
+  const url = `${ROOT_URL}/${apiVersion}/auth/signup`;
 
-  const response = await axios
-    .post(`${ROOT_URL}/${apiVersion}/${URL}`, data)
-    .catch((err) => err.response);
-  const axiosResponse = response.data;
-
-  if (axiosResponse.error === 1) {
-    return axiosResponse;
-  }
-
-  return axiosResponse.data;
+  return callAPI({
+    url,
+    method: "POST",
+    data,
+  });
 }
 
 export async function setLogIn(data: LogInTypes) {
-  const URL = `auth/signin`;
+  const url = `${ROOT_URL}/${apiVersion}/auth/signin`;
 
-  const response = await axios
-    .post(`${ROOT_URL}/${apiVersion}/${URL}`, data)
-    .catch((err) => err.response);
-
-  if (response.status > 300) {
-    const res = {
-      error: true,
-      message: response.data.message,
-      data: null,
-    };
-    return res;
-  }
-
-  const res = {
-    error: false,
-    message: "Success",
-    data: response.data.data,
-  };
-  return res;
+  return callAPI({
+    url,
+    method: "POST",
+    data,
+  });
 }

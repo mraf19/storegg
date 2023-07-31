@@ -26,7 +26,8 @@ export default function SignUpPhoto() {
   const [categories, setCategories] = useState<CategoryTypes[]>([]);
 
   const getCategoryAPI = useCallback(async () => {
-    const data = await getCategory();
+    const response = await getCategory();
+    const data = response.data;
     setCategories(data);
     setFavorite(data[0]._id);
   }, []);
@@ -52,7 +53,7 @@ export default function SignUpPhoto() {
 
     const result = await setSignUp(data);
 
-    if (result.error === 1) {
+    if (result.error) {
       toast.error(result.message);
     } else {
       toast.success("Berhasil Register!");
