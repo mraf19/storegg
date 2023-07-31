@@ -1,33 +1,38 @@
 export type CategoryTypes = {
-    _id: string
-    name: string
-}
+  _id: string;
+  name: string;
+};
 
 export type FeaturedGameTypes = {
-    _id: string
-    name: string
-    status: string
-    thumbnail: string
-    category: CategoryTypes
-}
+  _id: string;
+  name: string;
+  status: string;
+  thumbnail: string;
+  category: CategoryTypes;
+};
 
 export type NominalTypes = {
-    _id: string,
-    coinName: string,
-    coinQuantity: number,
-    price: number
-}
+  _id: string;
+  coinName: string;
+  coinQuantity: number;
+  price: number;
+};
 
 export type BankTypes = {
-    _id: string
-    name: string
-    noRekening: string
-    bankName: string
-}
+  _id: string;
+  name: string;
+  noRekening: string;
+  bankName: string;
+};
 
 export type PaymentTypes = {
-    _id: string
-    status: string
-    type: string
-    banks: BankTypes[]
-}
+  _id: string;
+  status: string;
+  type: string;
+  banks: BankTypes[];
+};
+
+export type LogInTypes = {
+  email: string;
+  password: string;
+};
