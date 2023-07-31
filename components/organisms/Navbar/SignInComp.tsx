@@ -1,10 +1,27 @@
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-type SignInCompProps = {
-  isLoggedIn: boolean;
-};
+export default function SignInComp() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({
+    avatar: "",
+  });
+  console.log(user);
 
-export default function SignInComp({ isLoggedIn }: SignInCompProps) {
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      const jwtToken = atob(token!);
+      const payload = jwtDecode(jwtToken);
+      const user = payload.player;
+      const IMG = process.env.NEXT_PUBLIC_IMG_API;
+      user.avatar = `${IMG}/${user.avatar}`;
+      setUser(user);
+      setIsLoggedIn(true);
+    }
+  }, []);
   if (isLoggedIn) {
     return (
       <li className="nav-item my-auto dropdown d-flex">
@@ -19,7 +36,7 @@ export default function SignInComp({ isLoggedIn }: SignInCompProps) {
             aria-expanded="false"
           >
             <img
-              src="/img/avatar-1.png"
+              src={user.avatar}
               className="rounded-circle"
               width="40"
               height="40"
