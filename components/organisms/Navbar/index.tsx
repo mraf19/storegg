@@ -33,7 +33,7 @@ export default function Navbar() {
                   path={menu.path}
                 />
               ))}
-              <SignInComp isLoggedIn={isLoggedIn} />
+              <SignInComp />
             </ul>
           </div>
         </div>

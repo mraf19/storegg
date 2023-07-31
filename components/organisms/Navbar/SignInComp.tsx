@@ -2,26 +2,31 @@ import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { JWTPayloadTypes, UserTypes } from "../../../services/dataTypes";
 
 export default function SignInComp() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({
     avatar: "",
   });
-  console.log(user);
 
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
       const jwtToken = atob(token!);
-      const payload = jwtDecode(jwtToken);
-      const user = payload.player;
+      const payload: JWTPayloadTypes = jwtDecode(jwtToken);
+      const userPayload: UserTypes = payload.player;
       const IMG = process.env.NEXT_PUBLIC_IMG_API;
-      user.avatar = `${IMG}/${user.avatar}`;
-      setUser(user);
+      userPayload.avatar = `${IMG}/${userPayload.avatar}`;
+      setUser(userPayload);
       setIsLoggedIn(true);
     }
   }, []);
+
+  const onLogOut = () => {
+    Cookies.remove("token");
+    setIsLoggedIn(false);
+  };
   if (isLoggedIn) {
     return (
       <li className="nav-item my-auto dropdown d-flex">
@@ -73,9 +78,12 @@ export default function SignInComp() {
               </Link>
             </li>
             <li>
-              <Link className="dropdown-item text-lg color-palette-2" href="/">
+              <button
+                className="dropdown-item text-lg color-palette-2"
+                onClick={onLogOut}
+              >
                 Log Out
-              </Link>
+              </button>
             </li>
           </ul>
         </div>

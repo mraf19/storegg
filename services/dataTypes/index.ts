@@ -36,3 +36,16 @@ export type LogInTypes = {
   email: string;
   password: string;
 };
+
+export type UserTypes = {
+  id: string;
+  username: string;
+  name: string;
+  email: string;
+  avatar: string;
+};
+
+export type JWTPayloadTypes = {
+  player: UserTypes;
+  iat: number;
+};
