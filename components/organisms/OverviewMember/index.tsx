@@ -3,27 +3,14 @@ import { useCallback, useEffect, useState } from "react";
 import { getMemberOverview } from "../../../services/player";
 import TableRow from "./TableRow";
 import { IMG } from "../../../utils/constant";
-
-type CountTypes = {
-  name: string;
-  valeu: number;
-};
-
-type DataTypes = {
-  historyVoucherTopup: {
-    category: string;
-    coinName: string;
-    coinQuantity: string;
-    gameName: string;
-    price: number;
-    thumbnail: string;
-  };
-  status: string;
-};
+import {
+  CountTypes,
+  HistoryTransactionTypes,
+} from "../../../services/dataTypes";
 
 export default function OverviewMember() {
   const [count, setCount] = useState<CountTypes[]>([]);
-  const [data, setData] = useState<DataTypes[]>([]);
+  const [data, setData] = useState<HistoryTransactionTypes[]>([]);
   const getDataMember = useCallback(async () => {
     const response = await getMemberOverview();
     setCount(response.data.count);

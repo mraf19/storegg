@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { NumericFormat } from "react-number-format";
+import capitalize from "../../../utils/capitalize";
 
 type TableRowProps = {
   imgUrl: string;
@@ -53,11 +54,9 @@ export default function TableRow({
       </td>
       <td>
         <div>
-          <span
-            className={`float-start icon-status ${status.toLowerCase()}`}
-          ></span>
+          <span className={`float-start icon-status ${status}`}></span>
           <p className="fw-medium text-start color-palette-1 m-0 position-relative">
-            {status.charAt(0).toUpperCase() + status.slice(1)}
+            {capitalize(status)}
           </p>
         </div>
       </td>

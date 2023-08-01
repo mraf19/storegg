@@ -58,3 +58,22 @@ export type CheckOutTypes = {
   name: string;
   accountUser: string;
 };
+
+export type CountTypes = {
+  name: string;
+  valeu: number;
+};
+
+export type HistoryVoucherTopupTypes = {
+  category: string;
+  coinName: string;
+  coinQuantity: string;
+  gameName: string;
+  price: number;
+  thumbnail: string;
+};
+
+export type HistoryTransactionTypes = {
+  historyVoucherTopup: HistoryVoucherTopupTypes;
+  status: string;
+};
