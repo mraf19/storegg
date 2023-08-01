@@ -49,3 +49,12 @@ export type JWTPayloadTypes = {
   player: UserTypes;
   iat: number;
 };
+
+export type CheckOutTypes = {
+  voucher: string;
+  nominal: string;
+  payment: string;
+  bank: string;
+  name: string;
+  accountUser: string;
+};

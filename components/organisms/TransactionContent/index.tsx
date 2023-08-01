@@ -1,4 +1,4 @@
-import { numberFormat } from "../../../utils/NumberFormatter";
+import { NumericFormat } from "react-number-format";
 import TransactionStatus from "../../molecules/TransactionsStatus";
 import TableTransactions from "../../molecules/TableTransactions";
 
@@ -14,7 +14,13 @@ export default function TransactionContent() {
             <div className="mb-30">
               <p className="text-lg color-palette-2 mb-12">You’ve spent</p>
               <h3 className="text-5xl fw-medium color-palette-1">
-                Rp {numberFormat(4518000500)}
+                <NumericFormat
+                  value={4518000500}
+                  prefix="Rp. "
+                  displayType="text"
+                  thousandSeparator="."
+                  decimalSeparator=","
+                />
               </h3>
             </div>
             <TransactionStatus />

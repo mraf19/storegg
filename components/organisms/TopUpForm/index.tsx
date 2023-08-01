@@ -7,6 +7,8 @@ import {
 } from "../../../services/dataTypes";
 import PaymentCard from "./PaymentCard";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 type TopUpFormProps = {
   nominals: NominalTypes[];
@@ -19,26 +21,38 @@ export default function TopUpForm({ nominals, payments }: TopUpFormProps) {
   const [nominal, setNominal] = useState<NominalTypes>({} as NominalTypes);
   const [payment, setPayment] = useState<PaymentTypes>({} as PaymentTypes);
   const [bank, setBank] = useState<BankTypes>({} as BankTypes);
+  const router = useRouter();
 
   const setDataPayment = (payment: PaymentTypes, bank: BankTypes) => {
     setPayment(payment);
     setBank(bank);
   };
 
-  const onSubmit = () => {
-    const dataTopUp = {
-      verifyID,
-      nominal,
-      payment,
-      bank,
-      bankAccountName,
-    };
-    console.log(dataTopUp);
+  const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    if (
+      verifyID.length === 0 ||
+      Object.keys(nominal).length === 0 ||
+      Object.keys(payment).length === 0 ||
+      Object.keys(bank).length === 0 ||
+      bankAccountName.length === 0
+    ) {
+      toast.error("Semua data wajib diisi!!");
+    } else {
+      const dataTopUp = {
+        verifyID,
+        nominal,
+        payment,
+        bank,
+        bankAccountName,
+      };
+      localStorage.setItem("data-topup", JSON.stringify(dataTopUp!));
+      router.push("/checkout");
+    }
   };
 
-  console.log(nominal);
   return (
-    <form action="./checkout.html" method="POST">
+    <form>
       <div className="pt-md-50 pt-30">
         <div className="">
           <Input

@@ -1,4 +1,5 @@
 import callAPI from "../config/api";
+import { CheckOutTypes } from "./dataTypes";
 
 const ROOT_URL = process.env.NEXT_PUBLIC_API;
 const apiVersion = "api/v1";
@@ -27,5 +28,16 @@ export async function getCategory() {
   return callAPI({
     url,
     method: "GET",
+  });
+}
+
+export async function setCheckOut(data: CheckOutTypes) {
+  const url = `${ROOT_URL}/${apiVersion}/players/checkout`;
+
+  return callAPI({
+    url,
+    method: "POST",
+    data,
+    token: true,
   });
 }

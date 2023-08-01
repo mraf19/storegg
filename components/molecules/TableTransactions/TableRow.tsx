@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { numberFormat } from "../../../utils/NumberFormatter";
+import { NumericFormat } from "react-number-format";
 import Link from "next/link";
 
 type TableRowProps = {
@@ -43,7 +43,13 @@ export default function TableRowTransactions({
       </td>
       <td>
         <p className="fw-medium text-start color-palette-1 m-0">
-          Rp {numberFormat(price)}
+          <NumericFormat
+            value={price}
+            prefix="Rp. "
+            displayType="text"
+            thousandSeparator="."
+            decimalSeparator=","
+          />
         </p>
       </td>
       <td>

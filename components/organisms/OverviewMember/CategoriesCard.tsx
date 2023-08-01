@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { numberFormat } from "../../../utils/NumberFormatter";
+import { NumericFormat } from "react-number-format";
 
 type CategoriesCardProps = {
   imgUrl: string;
@@ -26,7 +26,13 @@ export default function CategoriesCard({
         <div>
           <p className="text-sm color-palette-2 mb-1">Total Spent</p>
           <p className="text-2xl color-palette-1 fw-medium m-0">
-            Rp {numberFormat(totalSpent)}
+            <NumericFormat
+              value={totalSpent}
+              prefix="Rp. "
+              displayType="text"
+              thousandSeparator="."
+              decimalSeparator=","
+            />
           </p>
         </div>
       </div>
