@@ -1,13 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 
 import { useCallback, useEffect, useState } from "react";
 import { getCategory } from "../services/player";
 import { CategoryTypes } from "../services/dataTypes";
 import { setSignUp } from "../services/auth";
-
-import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 
 export default function SignUpPhoto() {
@@ -158,7 +156,6 @@ export default function SignUpPhoto() {
             </div>
           </form>
         </div>
-        <ToastContainer position="top-center" />
       </section>
     </>
   );

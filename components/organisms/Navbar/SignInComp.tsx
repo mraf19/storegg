@@ -3,6 +3,7 @@ import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { JWTPayloadTypes, UserTypes } from "../../../services/dataTypes";
+import { toast } from "react-toastify";
 
 export default function SignInComp() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,6 +26,7 @@ export default function SignInComp() {
 
   const onLogOut = () => {
     Cookies.remove("token");
+    toast.success("Berhasil Log Out!");
     setIsLoggedIn(false);
   };
   if (isLoggedIn) {

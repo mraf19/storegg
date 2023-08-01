@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { ToastContainer, toast } from "react-toastify";
 
 // IMPORT CSS
 import "../styles/homepage.css";
@@ -17,6 +18,7 @@ import "../styles/transactions-detail.css";
 import "../styles/edit-profile.css";
 import "../styles/navbar-log-in.css";
 import "../styles/utilities.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import type { AppProps } from "next/app";
 
@@ -54,6 +56,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>StoreGG | Top Up and Gaming Store</title>
       </Head>
       <Component {...pageProps} />
+      <ToastContainer />
     </>
   );
 }
