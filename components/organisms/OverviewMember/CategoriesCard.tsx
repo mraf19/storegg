@@ -17,7 +17,7 @@ export default function CategoriesCard({
             src={
               title === "PC" || title === "Desktop"
                 ? "/icon/ic-desktop.svg"
-                : title === "mobile"
+                : title === "Mobile"
                 ? "/icon/ic-mobile.svg"
                 : "/icon/ic-other.svg"
             }
