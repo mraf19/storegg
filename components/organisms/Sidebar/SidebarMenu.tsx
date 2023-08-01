@@ -1,10 +1,13 @@
+import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 type SidebarMenuProps = {
   imgUrl: string;
   title: string;
-  path: string;
+  path?: string;
   isActive: boolean;
 };
 export default function SidebarMenu({
@@ -13,6 +16,15 @@ export default function SidebarMenu({
   path,
   isActive,
 }: SidebarMenuProps) {
+  const router = useRouter();
+
+  const onLogOut = () => {
+    Cookies.remove("token");
+    toast.success("Berhasil Log Out!");
+    setTimeout(() => {
+      router.push("/signin");
+    }, 500);
+  };
   return (
     <div className={`item ${isActive && "active"} mb-30`}>
       <Image
@@ -23,9 +35,19 @@ export default function SidebarMenu({
         className="me-3"
       />
       <p className="item-title m-0">
-        <Link href={path} className="text-lg text-decoration-none">
-          {title}
-        </Link>
+        {title === "Log Out" ? (
+          <a
+            className="text-lg text-decoration-none"
+            onClick={onLogOut}
+            style={{ cursor: "pointer" }}
+          >
+            {title}
+          </a>
+        ) : (
+          <Link href={path!} className="text-lg text-decoration-none">
+            {title}
+          </Link>
+        )}
       </p>
     </div>
   );
