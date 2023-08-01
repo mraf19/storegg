@@ -1,25 +1,34 @@
-import { numberFormat } from "../../../utils/NumberFormatter";
+import { NumericFormat } from "react-number-format";
 
 type NominalCardProps = {
   id: string;
-  coinQuantity: number
-  coinName: string
+  coinQuantity: number;
+  coinName: string;
   price: number;
+  onChange: React.ChangeEventHandler<HTMLLabelElement>;
 };
 
 export default function NominalCard({
-  id, 
+  id,
   coinName,
   coinQuantity,
   price,
+  onChange,
 }: NominalCardProps) {
   return (
     <>
       <label
         className="col-lg-4 col-sm-6 ps-md-15 pe-md-15 pt-md-15 pb-md-15 pt-10 pb-10"
         htmlFor={id}
+        onChange={onChange}
       >
-        <input className="d-none" type="radio" id={id} name={coinName} value={id} />
+        <input
+          className="d-none"
+          type="radio"
+          id={id}
+          name={coinName}
+          value={id}
+        />
         <div className="detail-card">
           <div className="d-flex justify-content-between">
             <p className="text-3xl color-palette-1 m-0">
@@ -43,7 +52,15 @@ export default function NominalCard({
               />
             </svg>
           </div>
-          <p className="text-lg color-palette-1 m-0">Rp. {numberFormat(price)}</p>
+          <p className="text-lg color-palette-1 m-0">
+            <NumericFormat
+              value={price}
+              prefix="Rp. "
+              displayType="text"
+              thousandSeparator="."
+              decimalSeparator=","
+            />
+          </p>
         </div>
       </label>
     </>

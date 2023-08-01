@@ -1,15 +1,42 @@
-import Link from "next/link";
 import Input from "../../atoms/Input";
 import NominalCard from "./NominalCard";
-import { NominalTypes, PaymentTypes } from "../../../services/dataTypes";
+import {
+  BankTypes,
+  NominalTypes,
+  PaymentTypes,
+} from "../../../services/dataTypes";
 import PaymentCard from "./PaymentCard";
+import { useState } from "react";
 
 type TopUpFormProps = {
-  nominals: NominalTypes[]
-  payments: PaymentTypes[]
-}
+  nominals: NominalTypes[];
+  payments: PaymentTypes[];
+};
 
-export default function TopUpForm({nominals, payments} : TopUpFormProps) {
+export default function TopUpForm({ nominals, payments }: TopUpFormProps) {
+  const [verifyID, setVerifyID] = useState("");
+  const [bankAccountName, setBankAccountName] = useState("");
+  const [nominal, setNominal] = useState<NominalTypes>({} as NominalTypes);
+  const [payment, setPayment] = useState<PaymentTypes>({} as PaymentTypes);
+  const [bank, setBank] = useState<BankTypes>({} as BankTypes);
+
+  const setDataPayment = (payment: PaymentTypes, bank: BankTypes) => {
+    setPayment(payment);
+    setBank(bank);
+  };
+
+  const onSubmit = () => {
+    const dataTopUp = {
+      verifyID,
+      nominal,
+      payment,
+      bank,
+      bankAccountName,
+    };
+    console.log(dataTopUp);
+  };
+
+  console.log(nominal);
   return (
     <form action="./checkout.html" method="POST">
       <div className="pt-md-50 pt-30">
@@ -19,6 +46,10 @@ export default function TopUpForm({nominals, payments} : TopUpFormProps) {
             name="ID"
             label="Verify ID"
             placeholder="Enter yout ID"
+            value={verifyID}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setVerifyID(event.target.value)
+            }
           />
         </div>
       </div>
@@ -27,13 +58,17 @@ export default function TopUpForm({nominals, payments} : TopUpFormProps) {
           Nominal Top Up
         </p>
         <div className="row justify-content-between">
-          {
-            nominals.map(nominal => (
-              <NominalCard key={nominal._id} id={nominal._id} coinName={nominal.coinName} coinQuantity={nominal.coinQuantity} price={nominal.price}
-          />
-            ))
-          }
-          
+          {nominals.map((nominal) => (
+            <NominalCard
+              key={nominal._id}
+              id={nominal._id}
+              coinName={nominal.coinName}
+              coinQuantity={nominal.coinQuantity}
+              price={nominal.price}
+              onChange={() => setNominal(nominal)}
+            />
+          ))}
+
           <div className="col-lg-4 col-sm-6"></div>
         </div>
       </div>
@@ -43,13 +78,17 @@ export default function TopUpForm({nominals, payments} : TopUpFormProps) {
         </p>
         <fieldset id="paymentMethod">
           <div className="row justify-content-between">
-            {
-              payments.map(payment => (
-                payment.banks.map(bank => (
-                  <PaymentCard key={bank._id} id={bank._id} bankName={bank.bankName} type={payment.type} />
-                ))
+            {payments.map((payment) =>
+              payment.banks.map((bank) => (
+                <PaymentCard
+                  key={bank._id}
+                  id={bank._id}
+                  bankName={bank.bankName}
+                  type={payment.type}
+                  onChange={() => setDataPayment(payment, bank)}
+                />
               ))
-            }
+            )}
             <div className="col-lg-4 col-sm-6"></div>
           </div>
         </fieldset>
@@ -60,16 +99,19 @@ export default function TopUpForm({nominals, payments} : TopUpFormProps) {
           name="bankAccount"
           label="Bank Account Name"
           placeholder="Enter your Bank Account Name"
+          value={bankAccountName}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setBankAccountName(event.target.value)
+          }
         />
       </div>
       <div className="d-sm-block d-flex flex-column w-100">
-        <Link
-          href="./checkout"
-          type="submit"
+        <button
           className="btn btn-submit rounded-pill fw-medium text-white border-0 text-lg"
+          onClick={onSubmit}
         >
           Continue
-        </Link>
+        </button>
       </div>
     </form>
   );
