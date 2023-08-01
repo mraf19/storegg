@@ -4,12 +4,12 @@ import { getMemberOverview } from "../../../services/player";
 import TableRow from "./TableRow";
 import { IMG } from "../../../utils/constant";
 import {
-  CountTypes,
+  TopUpCategoriesTypes,
   HistoryTransactionTypes,
 } from "../../../services/dataTypes";
 
 export default function OverviewMember() {
-  const [count, setCount] = useState<CountTypes[]>([]);
+  const [count, setCount] = useState<TopUpCategoriesTypes[]>([]);
   const [data, setData] = useState<HistoryTransactionTypes[]>([]);
   const getDataMember = useCallback(async () => {
     const response = await getMemberOverview();

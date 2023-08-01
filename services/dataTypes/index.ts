@@ -59,7 +59,7 @@ export type CheckOutTypes = {
   accountUser: string;
 };
 
-export type CountTypes = {
+export type TopUpCategoriesTypes = {
   name: string;
   valeu: number;
 };
