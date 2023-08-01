@@ -39,7 +39,7 @@ export default async function callAPI({
   const res = {
     error: false,
     message: "Success",
-    data: response.data.data,
+    data: response.data.count ? response.data : response.data.data,
   };
   return res;
 }

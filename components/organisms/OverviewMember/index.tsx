@@ -1,8 +1,38 @@
 import CategoriesCard from "./CategoriesCard";
-import data from "../../../data/CategoriesCard.json";
-import Table from "./Table";
+import { useCallback, useEffect, useState } from "react";
+import { getMemberOverview } from "../../../services/player";
+import TableRow from "./TableRow";
+import { IMG } from "../../../utils/constant";
+
+type CountTypes = {
+  name: string;
+  valeu: number;
+};
+
+type DataTypes = {
+  historyVoucherTopup: {
+    category: string;
+    coinName: string;
+    coinQuantity: string;
+    gameName: string;
+    price: number;
+    thumbnail: string;
+  };
+  status: string;
+};
 
 export default function OverviewMember() {
+  const [count, setCount] = useState<CountTypes[]>([]);
+  const [data, setData] = useState<DataTypes[]>([]);
+  const getDataMember = useCallback(async () => {
+    const response = await getMemberOverview();
+    setCount(response.data.count);
+    setData(response.data.data);
+  }, []);
+  useEffect(() => {
+    getDataMember();
+  }, []);
+  console.log(data);
   return (
     <main className="main-wrapper">
       <div className="ps-lg-0">
@@ -13,13 +43,11 @@ export default function OverviewMember() {
           </p>
           <div className="main-content">
             <div className="row">
-              {data.map((item, index) => (
+              {count.map((item, index) => (
                 <CategoriesCard
                   key={`card-categories-${index}`}
-                  imgUrl={item.imgUrl}
-                  title1={item.title1}
-                  title2={item.title2}
-                  totalSpent={item.totalSpent}
+                  title={item.name}
+                  totalSpent={item.valeu}
                 />
               ))}
             </div>
@@ -30,7 +58,31 @@ export default function OverviewMember() {
             Latest Transactions
           </p>
           <div className="main-content main-content-table overflow-auto">
-            <Table />
+            <table className="table table-borderless">
+              <thead>
+                <tr className="color-palette-1">
+                  <th className="text-start" scope="col">
+                    Game
+                  </th>
+                  <th scope="col">Item</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((item, index) => (
+                  <TableRow
+                    key={`table-data-${index}`}
+                    imgUrl={`${IMG}/${item.historyVoucherTopup.thumbnail}`}
+                    title={item.historyVoucherTopup.gameName}
+                    device={item.historyVoucherTopup.category}
+                    price={item.historyVoucherTopup.price}
+                    item={`${item.historyVoucherTopup.coinQuantity} ${item.historyVoucherTopup.coinName}`}
+                    status={item.status}
+                  />
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

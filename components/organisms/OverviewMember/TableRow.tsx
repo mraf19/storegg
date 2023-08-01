@@ -57,7 +57,7 @@ export default function TableRow({
             className={`float-start icon-status ${status.toLowerCase()}`}
           ></span>
           <p className="fw-medium text-start color-palette-1 m-0 position-relative">
-            {status}
+            {status.charAt(0).toUpperCase() + status.slice(1)}
           </p>
         </div>
       </td>

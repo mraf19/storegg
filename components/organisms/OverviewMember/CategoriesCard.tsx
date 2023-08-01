@@ -2,26 +2,30 @@ import Image from "next/image";
 import { NumericFormat } from "react-number-format";
 
 type CategoriesCardProps = {
-  imgUrl: string;
-  title1: string;
-  title2: string;
+  title: string;
   totalSpent: number;
 };
 export default function CategoriesCard({
-  imgUrl,
-  title1,
-  title2,
+  title,
   totalSpent,
 }: CategoriesCardProps) {
   return (
     <div className="col-lg-4 ps-15 pe-15 pb-lg-0 pb-4">
       <div className="categories-card">
         <div className="d-flex align-items-center mb-24">
-          <Image src={imgUrl} width={60} height={60} alt={`ic-${title2}`} />
-          <p className="color-palette-1 mb-0 ms-12">
-            {title1}
-            <br /> {title2}
-          </p>
+          <Image
+            src={
+              title === "PC" || title === "Desktop"
+                ? "/icon/ic-desktop.svg"
+                : title === "mobile"
+                ? "/icon/ic-mobile.svg"
+                : "/icon/ic-other.svg"
+            }
+            width={60}
+            height={60}
+            alt={`ic-${title}`}
+          />
+          <p className="color-palette-1 mb-0 ms-12">{title}</p>
         </div>
         <div>
           <p className="text-sm color-palette-2 mb-1">Total Spent</p>
