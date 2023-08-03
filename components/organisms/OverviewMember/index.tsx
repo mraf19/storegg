@@ -1,6 +1,6 @@
 import CategoriesCard from "./CategoriesCard";
 import { useCallback, useEffect, useState } from "react";
-import { getMemberOverview } from "../../../services/player";
+import { getMemberOverview } from "../../../services/member";
 import TableRow from "./TableRow";
 import { IMG } from "../../../utils/constant";
 import {
