@@ -14,7 +14,7 @@ type EditPropfileProps = {
 
 export default function EditProfile({ user }: EditPropfileProps) {
   const [name, setName] = useState(user.name);
-  const [image, setImage] = useState(user.avatar);
+  const [image, setImage] = useState<File>();
   const [imagePreview, setImagePreview] = useState("");
 
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function EditProfile({ user }: EditPropfileProps) {
     event.preventDefault();
     const data = new FormData();
 
-    data.append("image", image);
+    data.append("image", image!);
     data.append("name", name);
 
     const response = await updateMember(user.id, data);
@@ -58,7 +58,7 @@ export default function EditProfile({ user }: EditPropfileProps) {
                         />
                       ) : (
                         <Image
-                          src={image}
+                          src={user.avatar}
                           width={90}
                           height={90}
                           alt="edit-avatar"

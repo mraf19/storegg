@@ -39,7 +39,7 @@ export default function SignUpPhoto() {
   const onSubmit = async () => {
     const data = new FormData();
 
-    data.append("image", image);
+    data.append("image", image!);
     data.append("email", userForm.email);
     data.append("name", userForm.fullName);
     data.append("username", userForm.fullName);
