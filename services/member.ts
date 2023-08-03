@@ -12,3 +12,19 @@ export async function getMemberOverview() {
     token: true,
   });
 }
+
+export async function getTransaction(status: string) {
+  let params = "";
+  if (status === "all") {
+    params = "";
+  } else {
+    params = `?status=${status}`;
+  }
+  const url = `${ROOT_URL}/${apiVersion}/players/history${params}`;
+
+  return callAPI({
+    url,
+    method: "GET",
+    token: true,
+  });
+}

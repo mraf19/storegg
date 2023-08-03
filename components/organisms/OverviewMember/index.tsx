@@ -19,7 +19,6 @@ export default function OverviewMember() {
   useEffect(() => {
     getDataMember();
   }, []);
-  console.log(data);
   return (
     <main className="main-wrapper">
       <div className="ps-lg-0">

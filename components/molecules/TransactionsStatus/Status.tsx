@@ -1,20 +1,19 @@
-import Link from "next/link";
-
 type StatusProps = {
   status: string;
-  index: number;
+  active: boolean;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-export default function Status({ status, index }: StatusProps) {
+export default function Status({ status, active, onClick }: StatusProps) {
   return (
-    <Link
+    <button
       data-filter={status.toLowerCase()}
-      href={`#${status}`}
       className={`btn btn-status rounded-pill text-sm ${
-        index === 0 ? "btn-active" : ""
+        active ? "btn-active" : ""
       } me-3`}
+      onClick={onClick}
     >
       {status}
-    </Link>
+    </button>
   );
 }
