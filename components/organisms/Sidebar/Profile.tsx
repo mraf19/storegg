@@ -18,7 +18,6 @@ export default function Profile() {
       const jwtToken = atob(token!);
       const payload: JWTPayloadTypes = jwtDecode(jwtToken);
       const userPayload: UserTypes = payload.player;
-      console.log(userPayload);
       const IMG = process.env.NEXT_PUBLIC_IMG_API;
       userPayload.avatar = `${IMG}/${userPayload.avatar}`;
       setUser(userPayload);

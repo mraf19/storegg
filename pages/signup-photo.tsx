@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import { useCallback, useEffect, useState } from "react";
 import { getCategory } from "../services/player";
@@ -56,9 +56,7 @@ export default function SignUpPhoto() {
     } else {
       toast.success("Berhasil Register!");
       localStorage.removeItem("user-form");
-      setTimeout(() => {
-        router.push("signup-success");
-      }, 1000);
+      router.push("signup-success");
     }
   };
 

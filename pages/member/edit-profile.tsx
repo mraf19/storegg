@@ -33,9 +33,7 @@ export default function EditProfile({ user }: EditPropfileProps) {
     } else {
       localStorage.clear();
       toast.success("Berhasil Update!");
-      setTimeout(() => {
-        router.push("/signin");
-      }, 500);
+      router.push("/signin");
     }
   };
   return (

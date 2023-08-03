@@ -21,9 +21,7 @@ export default function SidebarMenu({
   const onLogOut = () => {
     Cookies.remove("token");
     toast.success("Berhasil Log Out!");
-    setTimeout(() => {
-      router.push("/signin");
-    }, 500);
+    router.push("/signin");
   };
   return (
     <div className={`item ${isActive && "active"} mb-30`}>
