@@ -6,6 +6,7 @@ import jwtDecode from "jwt-decode";
 
 export default function Profile() {
   const [user, setUser] = useState({
+    name: "",
     avatar: "",
     username: "",
     email: "",
@@ -17,6 +18,7 @@ export default function Profile() {
       const jwtToken = atob(token!);
       const payload: JWTPayloadTypes = jwtDecode(jwtToken);
       const userPayload: UserTypes = payload.player;
+      console.log(userPayload);
       const IMG = process.env.NEXT_PUBLIC_IMG_API;
       userPayload.avatar = `${IMG}/${userPayload.avatar}`;
       setUser(userPayload);
@@ -34,7 +36,9 @@ export default function Profile() {
           style={{ borderRadius: "100%" }}
         />
       )}
-      <h2 className="fw-bold text-xl color-palette-1 m-0">{user.username}</h2>
+      <h2 className="fw-bold text-xl color-palette-1 m-0">
+        {user.name ? user.name : user.username}
+      </h2>
       <p className="color-palette-2 m-0">{user.email}</p>
     </div>
   );

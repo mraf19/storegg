@@ -13,7 +13,7 @@ type EditPropfileProps = {
 };
 
 export default function EditProfile({ user }: EditPropfileProps) {
-  const [name, setName] = useState(user.username);
+  const [name, setName] = useState(user.name);
   const [image, setImage] = useState(user.avatar);
   const [imagePreview, setImagePreview] = useState("");
 
@@ -27,18 +27,17 @@ export default function EditProfile({ user }: EditPropfileProps) {
     data.append("name", name);
 
     const response = await updateMember(user.id, data);
+    console.log(response);
     if (response.error) {
       toast.error(response.message);
     } else {
+      localStorage.clear();
       toast.success("Berhasil Update!");
       setTimeout(() => {
         router.push("/signin");
-      }, 1000);
+      }, 500);
     }
-
-    console.log(response);
   };
-  console.log(user.id);
   return (
     <>
       <Sidebar />
