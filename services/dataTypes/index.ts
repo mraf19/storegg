@@ -73,7 +73,19 @@ export type HistoryVoucherTopupTypes = {
   thumbnail: string;
 };
 
+export type HistoryPaymentTypes = {
+  bankName: string;
+  name: string;
+  noRekening: string;
+  type: string;
+};
 export type HistoryTransactionTypes = {
   historyVoucherTopup: HistoryVoucherTopupTypes;
   status: string;
+  _id: string;
+  accountUser: string;
+  tax: number;
+  value: number;
+  name: string;
+  historyPayment: HistoryPaymentTypes;
 };

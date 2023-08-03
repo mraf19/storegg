@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { NumericFormat } from "react-number-format";
 import Link from "next/link";
+import capitalize from "../../../utils/capitalize";
 
 type TableRowProps = {
   imgUrl: string;
@@ -9,6 +10,7 @@ type TableRowProps = {
   item: string;
   price: number;
   status: string;
+  id: string;
 };
 
 export default function TableRowTransactions({
@@ -18,6 +20,7 @@ export default function TableRowTransactions({
   item,
   price,
   status,
+  id,
 }: TableRowProps) {
   return (
     <tr data-category={status.toLowerCase()} className="align-middle">
@@ -58,13 +61,13 @@ export default function TableRowTransactions({
             className={`float-start icon-status ${status.toLowerCase()}`}
           ></span>
           <p className="fw-medium text-start color-palette-1 m-0 position-relative">
-            {status}
+            {capitalize(status)}
           </p>
         </div>
       </td>
       <td>
         <Link
-          href="/member/transactions/detail"
+          href={`/member/transactions/${id}`}
           className="btn btn-status rounded-pill text-sm"
         >
           Details
