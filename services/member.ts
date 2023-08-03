@@ -38,3 +38,14 @@ export async function getTransactionDetail(id: string, serverToken: string) {
     serverToken,
   });
 }
+
+export async function updateMember(id: string, data: FormData) {
+  const url = `${ROOT_URL}/${apiVersion}/players/profile/${id}`;
+
+  return callAPI({
+    url,
+    method: "PUT",
+    data,
+    token: true,
+  });
+}

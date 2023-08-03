@@ -2,9 +2,10 @@ type InputProps = {
   label: string;
   type: string;
   name: string;
-  value: string
+  value: string;
   placeholder: string;
-  onChange: React.ChangeEventHandler
+  onChange?: React.ChangeEventHandler;
+  disabled?: boolean;
 };
 
 export default function Input({
