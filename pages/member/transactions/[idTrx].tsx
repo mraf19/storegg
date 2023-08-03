@@ -36,7 +36,6 @@ type GetServerSideProps = {
 export async function getServerSideProps({ req, params }: GetServerSideProps) {
   const { token } = req.cookies;
   const { idTrx } = params;
-  console.log(idTrx);
 
   if (!token) {
     return {

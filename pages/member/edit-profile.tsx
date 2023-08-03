@@ -27,7 +27,7 @@ export default function EditProfile({ user }: EditPropfileProps) {
     data.append("name", name);
 
     const response = await updateMember(user.id, data);
-    console.log(response);
+
     if (response.error) {
       toast.error(response.message);
     } else {

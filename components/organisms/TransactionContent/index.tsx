@@ -14,7 +14,6 @@ export default function TransactionContent() {
     const response = await getTransaction(status.toLowerCase());
     setTotal(response.data.total);
     setData(response.data.data);
-    console.log(response.data.data[0]._id);
   }, []);
 
   const onClickTab = (status: string) => {
