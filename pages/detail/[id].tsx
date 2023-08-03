@@ -4,35 +4,24 @@ import Navbar from "../../components/organisms/Navbar";
 import TopUpForm from "../../components/organisms/TopUpForm";
 import TopUpItem from "../../components/organisms/TopUpItem";
 import { useCallback, useEffect, useState } from "react";
-import { getDetailVoucher } from "../../services/player";
-import { NominalTypes, PaymentTypes } from "../../services/dataTypes";
+import { getDetailVoucher, getFeaturedGame } from "../../services/player";
+import {
+  DataItemTypes,
+  FeaturedGameTypes,
+  NominalTypes,
+  PaymentTypes,
+} from "../../services/dataTypes";
 
-export default function Detail() {
-  const { query, isReady } = useRouter();
-  const [detail, setDetail] = useState({
-    name: "",
-    thumbnail: "",
-    category: {
-      name: "",
-    },
-  });
-  const [nominals, setNominals] = useState<NominalTypes[]>([]);
-  const [payments, setPayments] = useState<PaymentTypes[]>([]);
+type DetailProps = {
+  dataItem: DataItemTypes;
+  nominals: NominalTypes[];
+  payment: PaymentTypes[];
+};
 
-  const getDetailVoucherAPI = useCallback(async (id: string) => {
-    const response = await getDetailVoucher(id);
-    const data = response.data;
-    setDetail(data.detail);
-    localStorage.setItem("data-item", JSON.stringify(data.detail));
-    setNominals(data.detail.nominals);
-    setPayments(data.payment);
-  }, []);
-
+export default function Detail({ dataItem, nominals, payment }: DetailProps) {
   useEffect(() => {
-    if (isReady) {
-      getDetailVoucherAPI(query.id);
-    }
-  }, [isReady]);
+    localStorage.setItem("data-item", JSON.stringify(dataItem));
+  }, []);
   return (
     <>
       <Navbar />
@@ -49,18 +38,18 @@ export default function Detail() {
           <div className="row">
             <TopUpItem
               type="mobile"
-              category={detail.category.name}
-              name={detail.name}
-              thumbnail={detail.thumbnail}
+              category={dataItem.category.name}
+              name={dataItem.name}
+              thumbnail={dataItem.thumbnail}
             />
             <div className="col-xl-9 col-lg-8 col-md-7 ps-md-25">
               <TopUpItem
                 type="desktop"
-                category={detail.category.name}
-                name={detail.name}
+                category={dataItem.category.name}
+                name={dataItem.name}
               />
               <hr />
-              <TopUpForm nominals={nominals} payments={payments} />
+              <TopUpForm nominals={nominals} payments={payment} />
             </div>
           </div>
         </div>
@@ -69,3 +58,39 @@ export default function Detail() {
     </>
   );
 }
+
+export const getStaticPaths = async () => {
+  const response = await getFeaturedGame();
+  const data = response.data;
+
+  const paths = data.map((item: FeaturedGameTypes) => {
+    return {
+      params: {
+        id: item._id,
+      },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+type GetStaticPropsTypes = {
+  params: {
+    id: string;
+  };
+};
+
+export const getStaticProps = async ({ params }: GetStaticPropsTypes) => {
+  const response = await getDetailVoucher(params.id);
+  const data = response.data;
+  return {
+    props: {
+      dataItem: data.detail,
+      nominals: data.detail.nominals,
+      payment: data.payment,
+    },
+  };
+};

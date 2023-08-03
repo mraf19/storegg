@@ -89,3 +89,15 @@ export type HistoryTransactionTypes = {
   name: string;
   historyPayment: HistoryPaymentTypes;
 };
+
+export type DataItemTypes = {
+  status: string;
+  nominals: NominalTypes[];
+  _id: string;
+  name: string;
+  category: CategoryTypes;
+  isFeatured: boolean;
+  thumbnail: string;
+  user: UserTypes;
+  __v: 0;
+};
